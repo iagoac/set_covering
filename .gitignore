@@ -20,6 +20,9 @@
 *.mod
 *.smod
 
+# CPLEX models
+*.lp
+
 # Compiled Static libraries
 *.lai
 *.la
@@ -30,3 +33,5 @@
 *.exe
 *.out
 *.app
+.nfs*
+cplex
