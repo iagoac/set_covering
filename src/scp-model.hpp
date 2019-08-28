@@ -29,6 +29,8 @@ public:
   /* Class constructor */
   SCP (std::vector<std::vector<int> > instance, const Args* arg)
   : _instance(instance), _args(arg), _model(this->_env), _cplex(this->_model) {
+    this->rows = instance.size();
+    this->cols = instance[0].size();
     this->initialize();
   }
 

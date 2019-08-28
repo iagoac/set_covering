@@ -16,7 +16,7 @@ void SCP::initialize(void) {
 
   #ifdef DEBUG
     std::cout << "Done!" << std::endl;
-    std::cout << "Adding problem constraints:" << std::endl;
+    std::cout << "Adding the covering constraints:" << std::endl;
   #endif
 
   this->covering_constraints();
@@ -63,8 +63,8 @@ void SCP::create_variables(void) {
 void SCP::add_objective(void) {
   IloNumExpr expr(this->_env);
 
-  for (int i = 0; i < this->cols; i++) {
-    expr += _x[i];
+  for (int s = 0; s < this->cols; s++) {
+    expr += _x[s];
   }
 
   this->_model.add(IloMinimize(this->_env, expr));
@@ -73,22 +73,14 @@ void SCP::add_objective(void) {
 
 /* Add all CPLEX constraints */
 void SCP::covering_constraints() {
-  #ifdef DEBUG
-    std::cout << "Creating the covering constraints: ";
-  #endif
-
-  for (int i = 0; i < this->cols; i++) {
+  for (int i = 0; i < this->rows; i++) {
     IloNumExpr expr(this->_env);
-    for (auto j : this->_instance[i]) {
-        expr += (j * this->_x[i]);
+    for (int s = 0; s < this->cols; s++) {
+        expr += (this->_instance[i][s] * this->_x[s]);
     }
-    expr.end();
     this->_model.add(expr >= 1);
+    expr.end();
   }
-
-  #ifdef DEBUG
-    std::cout << "Done!" << std::endl;
-  #endif
 }
 
 void SCP::add_cplex_params(void) {

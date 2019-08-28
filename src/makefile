@@ -30,10 +30,8 @@ NAME      := cplex
 
 .PHONY: clean
 
+default: CXX += -DDEBUG
 default: $(NAME)
-
-debug: CXX += -DDEBUG
-debug: $(NAME)
 
 deps/%.d: %.cpp
 	@mkdir -p $(shell dirname $(shell readlink -m -- $(@)))
