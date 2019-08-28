@@ -1,4 +1,4 @@
-#ifndef CPLEX_INCLUES_HH_
+#ifndef CPLEX_INCLUDES_HH_
 #define CPLEX_INCLUDES_HH_
 
 /* Include of the CPLEX libraries */
@@ -18,4 +18,4 @@ typedef IloArray<IloIntVarArray> IloIntVarMatrix;
 typedef IloArray<IloIntVarMatrix> IloIntVarMatrix3D;
 typedef IloArray<IloIntVarMatrix3D> IloIntVarMatrix4D;
 
-#endif
+#endif // CPLEX_INCLUDES_HH_
